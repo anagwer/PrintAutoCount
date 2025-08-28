@@ -1,17 +1,15 @@
 <?php
 
+use App\Http\Controllers\AreaController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\NumberSequenceController;
 use App\Http\Controllers\OrganizationController;
 use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\SalaryController;
-use App\Http\Controllers\TelegramController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use SebastianBergmann\CodeCoverage\Report\Xml\Unit;
-use Telegram\Bot\Laravel\Facades\Telegram;
 
 /*
 |--------------------------------------------------------------------------
@@ -81,7 +79,15 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
             Route::patch('/role/{id}', [UserController::class, 'setRole']);
         });
 
+        Route::group(['prefix' => 'lah-report'], function () {
+            Route::get('/', [ReportController::class, 'get']);
+            Route::get('/debtor', [ReportController::class, 'DebtorReport']);
+            Route::get('/export', [ReportController::class, 'DebtorReportExcel']);
+        });
 
+        Route::group(['prefix' => 'area'], function () {
+            Route::get('/', [AreaController::class, 'get']);
+        });
 
     });
 

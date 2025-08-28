@@ -17,7 +17,7 @@ class AuthController extends Controller
         $request->validate([
             'username' => 'required',
             'password' => 'required',
-            'target_db' => 'nullable|in:mysql,sqlsrv_secondary',
+            'target_db' => 'nullable|in:mysql,sqlsrv',
         ]);
 
         // Login tetap pakai koneksi utama (mysql)
